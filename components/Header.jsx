@@ -1,8 +1,17 @@
-import React from "react";
+import { useContext, useEffect } from "react";
+import authContext from "@/context/auth/authContext";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Header = () => {
+  const { usuarioAutenticado, usuario, cerrarSesion } = useContext(authContext);
+
+  useEffect(() => {
+    usuarioAutenticado();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <header className="container mx-auto flex flex-col  items-center py-8 justify-between md:flex-row">
       <Link href="/">
@@ -17,16 +26,32 @@ const Header = () => {
       </Link>
 
       <div className="">
-        <Link
-          href="/login"
-          className=" mr-2 bg-red-500 px-5 py-3 rounded text-white font-bold uppercase">
-          iniciar Sesion
-        </Link>
-        <Link
-          href="/crear-cuenta"
-          className="bg-black px-5 py-3 rounded text-white font-bold uppercase">
-          crear cuenta
-        </Link>
+        {usuario ? (
+          <div className="flex items-center">
+            <p className="mr-3">
+              Hola: <strong>{usuario.nombre}</strong>
+            </p>
+            <button
+              className=" mr-2 bg-red-500 px-5 py-3 rounded text-white font-bold uppercase"
+              type="button"
+              onClick={() => cerrarSesion()}>
+              cerrar sesion
+            </button>
+          </div>
+        ) : (
+          <>
+            <Link
+              href="/login"
+              className=" mr-2 bg-red-500 px-5 py-3 rounded text-white font-bold uppercase">
+              iniciar Sesion
+            </Link>
+            <Link
+              href="/crear-cuenta"
+              className="bg-black px-5 py-3 rounded text-white font-bold uppercase">
+              crear cuenta
+            </Link>
+          </>
+        )}
       </div>
     </header>
   );
