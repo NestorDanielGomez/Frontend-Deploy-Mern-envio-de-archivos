@@ -5,9 +5,10 @@ import Image from "next/image";
 import Layout from "@/components/Layout";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import Alerta from "@/components/Alerta";
 
 export default function CrearCuenta() {
-  const { usuarioAutenticado, registrarUsuario } = useContext(authContext);
+  const { mensaje, registrarUsuario } = useContext(authContext);
 
   useEffect(() => {}, []);
 
@@ -30,6 +31,7 @@ export default function CrearCuenta() {
         <h2 className="font-sans font-bold text-4xl text-gray-800 text-center my-4">
           Crear Cuenta
         </h2>
+        {mensaje && <Alerta />}
         <div className="flex justify-center mt-5">
           <div className="max-w-lg w-full">
             <form

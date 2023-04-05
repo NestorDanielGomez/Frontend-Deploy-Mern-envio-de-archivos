@@ -1,5 +1,8 @@
+import { env } from "@/next.config";
 import axios from "axios";
 
 const clienteAxios = axios.create({
-    baseURL:
-})
+  baseURL: process.env.backendURL,
+});
+
+export default clienteAxios;
