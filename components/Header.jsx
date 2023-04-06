@@ -13,7 +13,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="container mx-auto flex flex-col  items-center py-8 justify-between md:flex-row">
+    <header className="container mx-auto mb-1 flex flex-col  items-center py-8 justify-between md:flex-row">
       <Link href="/">
         <Image
           src="next.svg"
