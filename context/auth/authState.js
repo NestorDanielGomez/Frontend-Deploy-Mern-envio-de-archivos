@@ -58,7 +58,7 @@ const AuthState = ({ children }) => {
     }
     try {
       const respuesta = await clienteAxios.get("/api/auth");
-      console.log("respuesta", respuesta);
+
       if (respuesta.data.usuario) {
         dispatch({
           type: USUARIO_AUTENTICADO,
@@ -76,7 +76,7 @@ const AuthState = ({ children }) => {
   const iniciarSesion = async (datos) => {
     try {
       const respuesta = await clienteAxios.post("/api/auth", datos);
-      console.log("iniciar sesion respuesta", respuesta);
+
       dispatch({
         type: LOGIN_EXITOSO,
         payload: respuesta.data.token,
