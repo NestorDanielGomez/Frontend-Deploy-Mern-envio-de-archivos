@@ -1,10 +1,13 @@
 import React, { useContext, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import clienteAxios from "@/config/axios";
+import Formulario from "./Formulario";
 import appContext from "@/context/app/appContext";
+import authContext from "@/context/auth/authContext";
 
 const Dropzone = () => {
   const { mostrarAlerta, subirArchivoAlServidor, cargando, crearEnlace } = useContext(appContext);
+  const { usuario, autenticado } = useContext(authContext);
 
   const onDropRejected = () => {
     mostrarAlerta(
@@ -42,6 +45,8 @@ const Dropzone = () => {
         <div className="mt-10 w-full">
           <h4 className="mb-4 text-2xl font-bold text-center">Archivos</h4>
           <ul className="">{archivos}</ul>
+
+          {autenticado && <Formulario />}
           {cargando ? (
             <p className="uppercase my-10 text-center text-gray-600">Subiendo archivo...</p>
           ) : (

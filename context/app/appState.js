@@ -10,6 +10,9 @@ import {
   SUBIR_ARCHIVO_ERROR,
   CREAR_ENLACE_EXITO,
   CREAR_ENLACE_ERROR,
+  LIMPIAR_STATE,
+  AGREGAR_PASSWORD,
+  AGREGAR_DESCARGAS,
 } from "../../types/index";
 
 const AppState = ({ children }) => {
@@ -84,6 +87,27 @@ const AppState = ({ children }) => {
       console.log(error);
     }
   };
+
+  const limpiarState = () => {
+    dispatch({
+      type: LIMPIAR_STATE,
+    });
+  };
+
+  const agregarPassword = (password) => {
+    console.log("password", password);
+    dispatch({
+      type: AGREGAR_PASSWORD,
+      payload: password,
+    });
+  };
+  const agregarDescargas = (descargas) => {
+    console.log("cantidad", descargas);
+    dispatch({
+      type: AGREGAR_DESCARGAS,
+      payload: descargas,
+    });
+  };
   return (
     <appContext.Provider
       value={{
@@ -98,6 +122,9 @@ const AppState = ({ children }) => {
         password: state.password,
         url: state.url,
         descargas: state.descargas,
+        limpiarState,
+        agregarPassword,
+        agregarDescargas,
       }}>
       {children}
     </appContext.Provider>

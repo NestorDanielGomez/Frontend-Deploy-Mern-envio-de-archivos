@@ -25,7 +25,6 @@ export default function Home() {
       <div className="md:w-4/5 xl:w-3/5 mx-auto mb-32">
         {url ? (
           <>
-            {" "}
             <p className="mt-10 text-center text-2xl ">
               <span className="font-bold text-blue-900 text-3xl uppercase">Tu URL es:</span>{" "}
               <strong>{`${process.env.frontendURL}/enlaces/${url}`}</strong>
