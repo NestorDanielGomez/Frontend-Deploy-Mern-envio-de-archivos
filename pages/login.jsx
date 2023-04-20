@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -6,14 +6,18 @@ import authContext from "@/context/auth/authContext";
 import Alerta from "@/components/Alerta";
 import { useRouter } from "next/router";
 
+import { ThreeCircles } from "react-loader-spinner";
+
 const Login = () => {
   const router = useRouter();
-  const { iniciarSesion, mensaje, autenticado } = useContext(authContext);
+
+  const { iniciarSesion, mensaje, autenticado, esperando } = useContext(authContext);
 
   useEffect(() => {
     if (autenticado) {
       router.push("/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autenticado]);
 
   const formik = useFormik({
@@ -35,6 +39,21 @@ const Login = () => {
           Iniciar Sesión
         </h2>
         {mensaje && <Alerta />}
+        <div className="flex justify-center">
+          <ThreeCircles
+            height="50"
+            width="50"
+            color="#c9371d"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={esperando}
+            ariaLabel="three-circles-rotating"
+            outerCircleColor=""
+            innerCircleColor=""
+            middleCircleColor=""
+          />
+        </div>
+
         <div className="flex justify-center mt-5">
           <div className="max-w-lg w-full">
             <form

@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useState, CSSProperties } from "react";
 import authContext from "./authContext";
 import authReducer from "./authReducers";
 import {
@@ -24,6 +24,7 @@ const AuthState = ({ children }) => {
   };
 
   const [state, dispatch] = useReducer(authReducer, initialState);
+  const [esperando, setEsperando] = useState(false);
 
   const registrarUsuario = async (datos) => {
     try {
@@ -75,12 +76,14 @@ const AuthState = ({ children }) => {
 
   const iniciarSesion = async (datos) => {
     try {
+      setEsperando(true);
       const respuesta = await clienteAxios.post("/api/auth", datos);
 
       dispatch({
         type: LOGIN_EXITOSO,
         payload: respuesta.data.token,
       });
+      setEsperando(false);
     } catch (error) {
       dispatch({
         type: LOGIN_ERROR,
@@ -112,6 +115,7 @@ const AuthState = ({ children }) => {
         registrarUsuario,
         iniciarSesion,
         cerrarSesion,
+        esperando,
       }}>
       {children}
     </authContext.Provider>
