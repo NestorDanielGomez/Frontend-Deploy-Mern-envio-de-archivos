@@ -32,4 +32,5 @@ Dependencias utilizadas:
 
 ### `npm run dev`
 
+<img src="./public/iniciosesion.gif"/>
 <img src="./public/usuario%20registrado.png"/>
